@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <title>Choose Your Own Adventure</title>
+    <script src="https://unpkg.com/hyperscript.org@0.9.3"></script>
+    <style>
+      @font-face {
+        font-family: benguiatl;
+        src: url(benguiatl.otf);
+      }
+      @font-face {
+        font-family: benguiatl;
+        src: url(benguiatl-italic.otf);
+        font-style: italic;
+      }
+      body {
+        font-family: benguiatl;
+      }
+      h1 {
+        text-align: right;
+      }
+      h2 {
+        text-align: center;
+      }
+      button {
+        width: 100%;
+        text-align: right;
+        font-style: italic;
+        border: none;
+        background-color: transparent;
+        padding: 0px;
+        margin-bottom: 10px;
+      }
+      button:hover {
+        background-color: lightgray;
+      }
+      p {
+        text-indent: 25px;
+        text-align: justify;
+      }
+      hr {
+        margin-top: auto;
+        background-color: black;
+        opacity: 1;
+      }
+      .container {
+        max-width: 540px;
+      }
+    </style>
+    <script type="text/hyperscript">
+      on load
+        hide <section/>
+        show #p1
+      end
+      behavior TurnPage(p)
+        on click
+          hide closest <section/> show p
+        end
+      end
+    </script>
+  </head>
+  <body>
+    <div class="container py-3">
+      <section id="p1">
+        <h1>1</h1>
+        <p>
+          You wake up in a cold sweat, dazed and confused. After a few moments
+          you try to sit up, but realize you can’t move. Your arms and legs are
+          strapped down.
+        </p>
+        <p>
+          You attempt to wiggle free, but quickly stop when you hear a monstrous
+          noise coming from outside the room...and it's getting closer. Is
+          anyone around to help you, or will you have to fend for yourself?
+        </p>
+        <hr />
+        <button _="install TurnPage(p: #p2)">
+          If you attempt to free yourself, turn to page 2.
+        </button>
+        <button _="install TurnPage(p: #p3)">
+          If you call for help, turn to page 3.
+        </button>
+      </section>
+      <section id="p2">
+        <h1>2</h1>
+        <p>
+          You pull at your restraints, but are unable to get free. Another roar
+          fills the room and this time the room begins to shake wildly. It
+          shakes so wildly that the gurney you are on falls over and your
+          restraints break loose.
+        </p>
+        <p>
+          The roaring and shaking subsides, allowing you to stand and take in
+          the room around you. It's hard to tell thanks to all the flickering
+          lights, but it appears you are in some kind of dilapidated medical
+          room.
+        </p>
+        <p>
+          You can't hear the roaring anymore. Do you investigate the room or
+          immediately head for the exit.
+        </p>
+        <hr />
+        <button _="install TurnPage(p: #p4)">
+          If you investigate the room, turn to page 4.
+        </button>
+        <button _="install TurnPage(p: #p5)">
+          If you leave the room, turn to page 5.
+        </button>
+      </section>
+      <section id="p3">
+        <h1>3</h1>
+        <p>"HELP!"</p>
+        <h2>To Be Continued</h2>
+        <hr />
+      </section>
+      <section id="p4">
+        <h1>4</h1>
+        <h2>To Be Continued</h2>
+      </section>
+      <section id="p5">
+        <h1>5</h1>
+        <h2>To Be Continued</h2>
+      </section>
+    </div>
+  </body>
+</html>
