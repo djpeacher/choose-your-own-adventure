@@ -24,13 +24,13 @@
       body {
         font-family: benguiatl;
       }
-      h1 {
+      section:nth-child(odd) > h1 {
         text-align: right;
       }
       h2 {
         text-align: center;
       }
-      button {
+      section > button {
         width: 100%;
         text-align: right;
         font-style: italic;
@@ -39,7 +39,7 @@
         padding: 0px;
         margin-bottom: 10px;
       }
-      button:hover {
+      section > button:hover {
         background-color: lightgray;
       }
       p {
@@ -63,6 +63,36 @@
       behavior TurnPage(p)
         on click
           hide closest <section/> show p
+        end
+      end
+      behavior Stat(s, name)
+        on load
+          js(name)
+            return localStorage.getItem(name)
+          end
+          if it then set s.value to it then remove me then show s else hide s
+        end
+        on click
+          js(name)
+            const v = Math.floor(Math.random() * 20);
+            localStorage.setItem(name, v);
+            return v;
+          end
+          set s.value to it then remove me then show s
+        end
+      end
+      behavior SaveOnChange(name)
+        on load
+          js(name)
+            return localStorage.getItem(name)
+          end
+          if it then set name to it
+        end
+        on change
+          js(name, me)
+            console.log(name,me)
+            localStorage.setItem(name, me.value);
+          end
         end
       end
     </script>
@@ -129,6 +159,34 @@
         <h1>5</h1>
         <h2>To Be Continued</h2>
       </section>
+      <hr />
+      <div class="row">
+        <div class="col">
+          <label class="form-label">Skill</label>
+          <input id="stat-skill" type="number" class="form-control" _="install SaveOnChange(name: 'stat-skill')" />
+          <button class="btn btn-dark w-100" _="install Stat(s: #stat-skill, name: 'stat-skill')">Roll</button>
+        </div>
+        <div class="col">
+          <label class="form-label">Stamina</label>
+          <input id="stat-stamina" type="number" class="form-control" _="install SaveOnChange(name: 'stat-stamina')" />
+          <button class="btn btn-dark w-100" _="install Stat(s: #stat-stamina, name: 'stat-stamina')">Roll</button>
+        </div>
+        <div class="col">
+          <label class="form-label">Roll</label>
+          <input id="stat-luck" type="number" class="form-control" _="install SaveOnChange(name: 'stat-luck')" />
+          <button class="btn btn-dark w-100" _="install Stat(s: #stat-luck, name: 'stat-luck')">Roll</button>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col">
+          <label class="form-label">Notes</label>
+          <textarea
+           _="install SaveOnChange(name: 'notes')"
+            class="form-control"
+            rows="10"
+          ></textarea>
+        </div>
+      </div>
     </div>
   </body>
 </html>
